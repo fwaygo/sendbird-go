@@ -17,9 +17,9 @@ type Client interface {
 }
 
 type ClientConfig struct {
-	ApplicationID string
-	APIToken      string
-	Version       string `default:"v3"`
+	ApplicationID string `envconfig:"SENDBIRD_APPLICATION_ID"`
+	APIToken      string `envconfig:"SENDBIRD_API_TOKEN"`
+	Version       string `envconfig:"SENDBIRD_VERSION" default:"v3"`
 }
 
 type client struct {
