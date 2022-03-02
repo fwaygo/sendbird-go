@@ -27,15 +27,15 @@ type UsersGetResponse = UserResponse
 
 type UsersUpdateRequest struct {
 	UserID                  string     `json:"user_id"`
-	Nickname                *string    `json:"nickname"`
-	ProfileURL              *string    `json:"profile_url"`
-	ProfileFile             *os.File   `json:"profile_file"`
-	IssueAccessToken        *bool      `json:"issue_access_token" default:"false"`
-	IsActive                *bool      `json:"is_active"`
-	LastSeenAt              *time.Time `json:"last_seen_at"`
+	Nickname                *string    `json:"nickname,omitempty"`
+	ProfileURL              *string    `json:"profile_url,omitempty"`
+	ProfileFile             *os.File   `json:"profile_file,omitempty"`
+	IssueAccessToken        *bool      `json:"issue_access_token,omitempty" default:"false"`
+	IsActive                *bool      `json:"is_active,omitempty"`
+	LastSeenAt              *time.Time `json:"last_seen_at,omitempty"`
 	DiscoveryKeys           []string   `json:"discovery_keys"`
 	PreferredLanguages      []string   `json:"preferred_languages"`
-	LeaveAllWhenDeactivated *bool      `json:"leave_all_when_deactivated" default:"true"`
+	LeaveAllWhenDeactivated *bool      `json:"leave_all_when_deactivated,omitempty" default:"true"`
 }
 type UsersUpdateResponse = UserResponse
 

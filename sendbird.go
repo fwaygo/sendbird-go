@@ -14,6 +14,8 @@ type Client interface {
 	UsersGet(context.Context, api.UsersGetRequest) (*api.UsersGetResponse, error)
 	UsersUpdate(context.Context, api.UsersUpdateRequest) (*api.UsersUpdateResponse, error)
 	UsersDelete(context.Context, api.UsersDeleteRequest) error
+
+	ChannelsCreate(context.Context, api.ChannelCreateRequest) (*api.ChannelCreateResponse, error)
 }
 
 type ClientConfig struct {
