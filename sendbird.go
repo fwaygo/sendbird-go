@@ -19,6 +19,7 @@ type Client interface {
 	ChannelsCreate(context.Context, api.ChannelCreateRequest) (*api.ChannelCreateResponse, error)
 
 	SendUserMessage(context.Context, api.SendUserMessageRequest, api.ChannelParams) (*api.UserMessage, error)
+	SendFileMessage(context.Context, api.SendFileMessageRequest, api.ChannelParams) (*api.FileMessage, error)
 }
 
 type ClientConfig struct {
