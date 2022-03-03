@@ -5,8 +5,8 @@ type InvitationStatus string
 type HiddenStatus string
 
 const (
-	GROUP_CHANNEL ChannelType = "group_channel"
-	OPEN_CHANNEL  ChannelType = "open_channel"
+	GROUP_CHANNEL ChannelType = "group_channels"
+	OPEN_CHANNEL  ChannelType = "open_channels"
 )
 
 const (

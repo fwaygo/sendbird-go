@@ -7,13 +7,13 @@ import (
 )
 
 type UsersCreateRequest struct {
-	UserID           string          `json:"user_id"`
-	Nickname         string          `json:"nickname"`
-	ProfileURL       string          `json:"profile_url"`
-	ProfileFile      os.File         `json:"profile_file"`
-	IssueAccessToken bool            `json:"issue_access_token" default:"false"`
-	DiscoveryKeys    []string        `json:"discovery_keys"`
-	Metadata         json.RawMessage `json:"metadata"`
+	UserID           string           `json:"user_id"`
+	Nickname         string           `json:"nickname"`
+	ProfileURL       string           `json:"profile_url"`
+	ProfileFile      *os.File         `json:"profile_file,omitempty"`
+	IssueAccessToken *bool            `json:"issue_access_token" default:"false"`
+	DiscoveryKeys    []string         `json:"discovery_keys"`
+	Metadata         *json.RawMessage `json:"metadata,omitempty"`
 }
 type UsersCreateResponse = UserResponse
 
@@ -52,7 +52,7 @@ type UserResponse struct {
 	IsOnline           bool            `json:"is_online"`
 	IsActive           bool            `json:"is_active"`
 	CreatedAt          time.Time       `json:"created_at"`
-	LastSeenAt         time.Time       `json:"last_seen_at"`
+	LastSeenAt         uint32          `json:"last_seen_at"`
 	DiscoveryKeys      []string        `json:"discovery_keys"`
 	PreferredLanguages []string        `json:"preferred_languages"`
 	HasEverLoggedIn    bool            `json:"has_ever_logged_in"`

@@ -22,7 +22,7 @@ type SendBirdFile struct {
 }
 
 type BaseMessage struct {
-	MessageID       string          `json:"message_id"`
+	MessageID       uint64          `json:"message_id"`
 	Type            MessageType     `json:"type"`
 	CustomType      string          `json:"custom_type"`
 	ChannelUrl      string          `json:"channel_url"`
@@ -31,7 +31,7 @@ type BaseMessage struct {
 	MentionedUsers  []string        `json:"mentioned_users"`
 	IsRemoved       bool            `json:"is_removed"`
 	SortedMetaArray json.RawMessage `json:"sorted_metaarray"`
-	CreatedAt       time.Time       `json:"created_at"`
+	CreatedAt       uint64          `json:"created_at"`
 	UpdatedAt       uint64          `json:"updated_at"`
 }
 
@@ -60,17 +60,17 @@ type Message struct {
 }
 
 type SendBaseMessageRequest struct {
-	MessageType      MessageType      `json:"message_type"`
-	CustomType       *string          `json:"custom_type"`
-	Data             *string          `json:"data"`
-	SendPush         *bool            `json:"send_push"`
-	MentionType      *MentionType     `json:"mention_type"`
-	MentionedUserIDs *[]string        `json:"mentioned_user_ids"`
-	IsSilent         *bool            `json:"is_silent"`
-	SortedMetaArray  *json.RawMessage `json:"sorted_metaarray"`
-	CreatedAt        *time.Time       `json:"created_at"`
-	DedupID          *string          `json:"dedup_id"`
-	APNSBundleID     *string          `json:"apns_bundle_id"`
+	MessageType      MessageType     `json:"message_type"`
+	CustomType       *string         `json:"custom_type,omitempty"`
+	Data             *string         `json:"data,omitempty"`
+	SendPush         *bool           `json:"send_push,omitempty"`
+	MentionType      *MentionType    `json:"mention_type,omitempty"`
+	MentionedUserIDs []string        `json:"mentioned_user_ids,omitempty"`
+	IsSilent         *bool           `json:"is_silent,omitempty"`
+	SortedMetaArray  json.RawMessage `json:"sorted_metaarray,omitempty"`
+	CreatedAt        *time.Time      `json:"created_at,omitempty"`
+	DedupID          *string         `json:"dedup_id,omitempty"`
+	APNSBundleID     *string         `json:"apns_bundle_id,omitempty"`
 }
 
 type SendUserMessageRequest struct {

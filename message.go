@@ -15,7 +15,7 @@ func (c *client) SendUserMessage(ctx context.Context, request api.SendUserMessag
 		return nil, err
 	}
 
-	req, err := http.NewRequest(http.MethodPost, c.url()+"/"+string(channel.ChannelType)+"/"+string(channel.ChannelUrl), bytes.NewBuffer(body))
+	req, err := http.NewRequest(http.MethodPost, c.url()+"/"+string(channel.ChannelType)+"/"+string(channel.ChannelUrl)+"/messages", bytes.NewBuffer(body))
 	if err != nil {
 		return nil, err
 	}
