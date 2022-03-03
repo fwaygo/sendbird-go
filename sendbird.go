@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"io/ioutil"
+	"log"
 	"net/http"
 
 	"github.com/fwaygo/sendbird-go/api"
@@ -47,20 +48,20 @@ func (c *client) url() string {
 func (c *client) do(request *http.Request) ([]byte, error) {
 	request.Header.Add("Content-Type", "application/json; charset=utf8")
 	request.Header.Add("Api-Token", c.apiToken)
-
+	log.Printf(c.apiToken)
 	response, err := http.DefaultClient.Do(request)
 	if err != nil {
 		return nil, err
 	}
 
-	if response.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("unexpected status code: %d", response.StatusCode)
-	}
-	defer response.Body.Close()
-
 	resp, err := ioutil.ReadAll(response.Body)
 	if err != nil {
 		return nil, err
+	}
+	defer response.Body.Close()
+
+	if response.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("[%d] %s", response.StatusCode, resp)
 	}
 
 	return resp, nil

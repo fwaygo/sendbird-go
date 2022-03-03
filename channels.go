@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	"log"
 	"net/http"
 
 	"github.com/fwaygo/sendbird-go/api"
@@ -14,6 +15,7 @@ func (c *client) ChannelsCreate(ctx context.Context, request api.ChannelCreateRe
 	if err != nil {
 		return nil, err
 	}
+	log.Printf("%s", body)
 
 	req, err := http.NewRequest(http.MethodPost, c.url()+"/group_channels", bytes.NewBuffer(body))
 	if err != nil {

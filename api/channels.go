@@ -1,7 +1,5 @@
 package api
 
-import "time"
-
 type ChannelType string
 type InvitationStatus string
 type HiddenStatus string
@@ -30,23 +28,23 @@ type ChannelParams struct {
 
 type ChannelCreateRequest struct {
 	UserIDs                 []string                    `json:"user_ids"`
-	Name                    string                      `json:"name"`
-	ChannelUrl              string                      `json:"channel_url"`
-	CoverUrl                string                      `json:"cover_url"`
-	CoverFile               []byte                      `json:"cover_file"`
-	CustomType              string                      `json:"custom_type"`
-	IsDistinct              bool                        `json:"is_distinct"`
-	InvitationStatus        map[string]InvitationStatus `json:"invitation_status"`
-	Data                    string                      `json:"data"`
-	IsPublic                bool                        `json:"is_public"`
-	IsEphemeral             bool                        `json:"is_ephemeral"`
-	IsSuper                 bool                        `json:"is_super"`
-	AccessCode              string                      `json:"access_code"`
-	InviterID               string                      `json:"iviter_id"`
-	Strict                  bool                        `json:"strict"`
-	HiddenStatus            map[string]HiddenStatus     `json:"hidden_status"`
-	OperatorIDs             []string                    `json:"operator_ids"`
-	BlockSDKUserChannelJoin bool                        `json:"block_sdk_user_channel_join"`
+	Name                    *string                     `json:"name,omitempty"`
+	ChannelUrl              *string                     `json:"channel_url,omitempty"`
+	CoverUrl                *string                     `json:"cover_url,omitempty"`
+	CoverFile               []byte                      `json:"cover_file,omitempty"`
+	CustomType              *string                     `json:"custom_type,omitempty"`
+	IsDistinct              *bool                       `json:"is_distinct,omitempty"`
+	InvitationStatus        map[string]InvitationStatus `json:"invitation_status,omitempty"`
+	Data                    *string                     `json:"data,omitempty"`
+	IsPublic                *bool                       `json:"is_public,omitempty"`
+	IsEphemeral             *bool                       `json:"is_ephemeral,omitempty"`
+	IsSuper                 *bool                       `json:"is_super,omitempty"`
+	AccessCode              *string                     `json:"access_code,omitempty"`
+	InviterID               *string                     `json:"inviter_id,omitempty"`
+	Strict                  *bool                       `json:"strict,omitempty"`
+	HiddenStatus            map[string]HiddenStatus     `json:"hidden_status,omitempty"`
+	OperatorIDs             []string                    `json:"operator_ids,omitempty"`
+	BlockSDKUserChannelJoin *bool                       `json:"block_sdk_user_channel_join,omitempty"`
 }
 
 type ChannelCreateResponse struct {
@@ -68,6 +66,6 @@ type ChannelCreateResponse struct {
 	OperatorIDs          []string                `json:"operator_ids"`
 	MaxLengthMessage     uint32                  `json:"max_length_message"`
 	LastMessage          Message                 `json:"last_message"`
-	CreatedAt            time.Time               `json:"created_at"`
+	CreatedAt            int32                   `json:"created_at"`
 	Freeze               bool                    `json:"freeze"`
 }
