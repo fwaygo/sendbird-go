@@ -48,7 +48,7 @@ func TestCreateChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	var ctx = context.Background()
+	ctx := context.Background()
 	channelName := "testChannelName"
 	users := []string{"test1user", "test2user"}
 
