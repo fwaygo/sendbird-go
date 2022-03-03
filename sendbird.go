@@ -16,6 +16,8 @@ type Client interface {
 	UsersDelete(context.Context, api.UsersDeleteRequest) error
 
 	ChannelsCreate(context.Context, api.ChannelCreateRequest) (*api.ChannelCreateResponse, error)
+
+	SendUserMessage(context.Context, api.SendUserMessageRequest, api.ChannelParams) (*api.UserMessage, error)
 }
 
 type ClientConfig struct {

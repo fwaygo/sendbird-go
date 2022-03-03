@@ -2,8 +2,14 @@ package api
 
 import "time"
 
+type ChannelType string
 type InvitationStatus string
 type HiddenStatus string
+
+const (
+	GROUP_CHANNEL ChannelType = "group_channel"
+	OPEN_CHANNEL  ChannelType = "open_channel"
+)
 
 const (
 	INVITATION_BY_FRIEND  InvitationStatus = "invited_by_friend"
@@ -16,6 +22,11 @@ const (
 	HIDDEN_ALLOW_AUTO_UNHIDE   HiddenStatus = "hidden_allow_auto_unhide"
 	HIDDEN_PREVENT_AUTO_UNHIDE HiddenStatus = "hidden_prevent_auto_unhide"
 )
+
+type ChannelParams struct {
+	ChannelType ChannelType
+	ChannelUrl  string
+}
 
 type ChannelCreateRequest struct {
 	UserIDs                 []string                    `json:"user_ids"`
