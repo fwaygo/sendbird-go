@@ -2,7 +2,6 @@ package api
 
 import (
 	"encoding/json"
-	"time"
 )
 
 type MessageType string
@@ -68,17 +67,33 @@ type SendBaseMessageRequest struct {
 	MentionedUserIDs []string        `json:"mentioned_user_ids,omitempty"`
 	IsSilent         *bool           `json:"is_silent,omitempty"`
 	SortedMetaArray  json.RawMessage `json:"sorted_metaarray,omitempty"`
-	CreatedAt        *time.Time      `json:"created_at,omitempty"`
+	CreatedAt        *uint64         `json:"created_at,omitempty"`
 	DedupID          *string         `json:"dedup_id,omitempty"`
 	APNSBundleID     *string         `json:"apns_bundle_id,omitempty"`
 }
 
 type SendUserMessageRequest struct {
 	SendBaseMessageRequest
-	UserID                    string           `json:"user_id"`
-	Message                   string           `json:"message"`
-	AppleCriticalAlertOptions *json.RawMessage `json:"apple_critical_alert_options"`
-	Sound                     *string          `json:"sound"`
-	Volume                    *float32         `json:"volume"`
-	MarkAsRead                *bool            `json:"mark_as_read"`
+	UserID                    string          `json:"user_id"`
+	Message                   string          `json:"message"`
+	AppleCriticalAlertOptions json.RawMessage `json:"apple_critical_alert_options,omitempty"`
+	Sound                     *string         `json:"sound,omitempty"`
+	Volume                    *float32        `json:"volume,omitempty"`
+	MarkAsRead                *bool           `json:"mark_as_read,omitempty"`
+}
+
+type SendFileMessageRequest struct {
+	SendBaseMessageRequest
+	UserID                    string          `json:"user_id"`
+	URL                       string          `json:"url"`
+	FileName                  string          `json:"file_name"`
+	FileSize                  *uint64         `json:"file_size,omitempty"`
+	FileType                  string          `json:"file_type"`
+	Thumbnails                []string        `json:"thumbnails,omitempty"`
+	RequireAuth               *bool           `json:"require_auth,omitempty"`
+	SendPush                  *bool           `json:"send_push,omitempty"`
+	MarkAsRead                *bool           `json:"mark_as_read,omitempty"`
+	AppleCriticalAlertOptions json.RawMessage `json:"apple_critical_alert_options"`
+	Sound                     *string         `json:"sound,omitempty"`
+	Volume                    *float32        `json:"volume,omitempty"`
 }

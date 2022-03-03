@@ -33,3 +33,28 @@ func (c *client) SendUserMessage(ctx context.Context, request api.SendUserMessag
 
 	return &response, nil
 }
+
+func (c *client) SendFileMessage(ctx context.Context, request api.SendFileMessageRequest, channel api.ChannelParams) (*api.FileMessage, error) {
+	body, err := json.Marshal(request)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, c.url()+"/"+string(channel.ChannelType)+"/"+string(channel.ChannelUrl)+"/messages", bytes.NewBuffer(body))
+	if err != nil {
+		return nil, err
+	}
+
+	resp, err := c.do(req)
+	if err != nil {
+		return nil, err
+	}
+
+	var response api.FileMessage
+	err = json.Unmarshal(resp, &response)
+	if err != nil {
+		return nil, err
+	}
+
+	return &response, nil
+}
