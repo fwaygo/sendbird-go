@@ -50,8 +50,8 @@ func TestCreateChannel(t *testing.T) {
 	}
 
 	ctx := context.Background()
-	channelName := "testChannelName"
-	users := []string{"test1user", "test2user"}
+	channelName := "iusrjFGvKc1HMHNMI9QHy0hGE3reAuq1:iusrMG8ADbdBCVOkr1mIpNnnMKDdwTz1"
+	users := []string{"iusrjFGvKc1HMHNMI9QHy0hGE3reAuq1", "iusrMG8ADbdBCVOkr1mIpNnnMKDdwTz1"}
 
 	channel, err := client.ChannelsCreate(ctx, api.ChannelCreateRequest{
 		UserIDs: users,

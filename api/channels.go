@@ -33,7 +33,7 @@ type ChannelCreateRequest struct {
 	CoverUrl                *string                     `json:"cover_url,omitempty"`
 	CoverFile               []byte                      `json:"cover_file,omitempty"`
 	CustomType              *string                     `json:"custom_type,omitempty"`
-	IsDistinct              *bool                       `json:"is_distinct,omitempty"`
+	IsDistinct              bool                        `json:"is_distinct,omitempty"`
 	InvitationStatus        map[string]InvitationStatus `json:"invitation_status,omitempty"`
 	Data                    *string                     `json:"data,omitempty"`
 	IsPublic                *bool                       `json:"is_public,omitempty"`
