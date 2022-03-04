@@ -52,7 +52,7 @@ type UserResponse struct {
 	IsOnline           bool            `json:"is_online"`
 	IsActive           bool            `json:"is_active"`
 	CreatedAt          time.Time       `json:"created_at"`
-	LastSeenAt         uint32          `json:"last_seen_at"`
+	LastSeenAt         uint64          `json:"last_seen_at"`
 	DiscoveryKeys      []string        `json:"discovery_keys"`
 	PreferredLanguages []string        `json:"preferred_languages"`
 	HasEverLoggedIn    bool            `json:"has_ever_logged_in"`
