@@ -52,7 +52,7 @@ type ChannelCreateResponse struct {
 	Name                 string                  `json:"name"`
 	ChannelUrl           string                  `json:"channel_url"`
 	CoverUrl             string                  `json:"cover_url"`
-	CustomType           string                  `json:"custom_type"`
+	CustomType           CustomType              `json:"custom_type"`
 	UnreadMessageCount   uint32                  `json:"unread_message_count"`
 	Data                 string                  `json:"data"`
 	IsDistinct           bool                    `json:"is_distinct"`
