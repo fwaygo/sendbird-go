@@ -54,9 +54,11 @@ func TestCreateChannel(t *testing.T) {
 	users := []string{"iusrjFGvKc1HMHNMI9QHy0hGE3reAuq1", "iusrMG8ADbdBCVOkr1mIpNnnMKDdwTz1"}
 
 	channel, err := client.ChannelsCreate(ctx, api.ChannelCreateRequest{
-		UserIDs: users,
-		Name:    &channelName,
+		UserIDs:    users,
+		Name:       &channelName,
+		IsDistinct: true,
 	})
+
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -102,13 +104,14 @@ func TestSendMessage(t *testing.T) {
 	}
 
 	log.Printf("Created Channel %s", channel.ChannelUrl)
+	request := api.SendBaseMessageRequest{
+		MessageType: "MESG",
+	}
 
 	message, err := client.SendUserMessage(ctx, api.SendUserMessageRequest{
-		SendBaseMessageRequest: api.SendBaseMessageRequest{
-			MessageType: "MESG",
-		},
-		UserID:  string(user1),
-		Message: "first test message",
+		SendBaseMessageRequest: request,
+		UserID:                 string(user1),
+		Message:                "first test message",
 	}, api.ChannelParams{
 		ChannelType: "group_channels",
 		ChannelUrl:  channel.ChannelUrl,

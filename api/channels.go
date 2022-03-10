@@ -3,6 +3,7 @@ package api
 type ChannelType string
 type InvitationStatus string
 type HiddenStatus string
+type CustomType string
 
 const (
 	GROUP_CHANNEL ChannelType = "group_channels"
@@ -19,6 +20,11 @@ const (
 	UNHIDDEN                   HiddenStatus = "unhidden"
 	HIDDEN_ALLOW_AUTO_UNHIDE   HiddenStatus = "hidden_allow_auto_unhide"
 	HIDDEN_PREVENT_AUTO_UNHIDE HiddenStatus = "hidden_prevent_auto_unhide"
+)
+
+const (
+	FWAYGO_ONE_TO_ONE CustomType = "fwaygo-one-to-one"
+	FWAYGO_GROUP      CustomType = "fwaygo-group"
 )
 
 type ChannelParams struct {
