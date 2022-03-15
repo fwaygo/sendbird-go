@@ -193,8 +193,6 @@ func TestListChannels(t *testing.T) {
 			t.Fatal(err)
 		}
 		if len(channelList.Channels) != 1 {
-			//fmt.Printf("%+v", channelList.Channels)
-			log.Printf("Query incorrect: request responded with %d channels", len(channelList.Channels))
 			t.Fatal("Query incorrect: request responded with multiple channels")
 		}
 	}

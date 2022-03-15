@@ -2,7 +2,6 @@ package sendbird
 
 import (
 	"encoding/json"
-	"log"
 	"reflect"
 	"strconv"
 
@@ -14,7 +13,6 @@ type ChannelListParams string
 func formatArrayToParams(key string, values []interface{}) string {
 	query := ""
 	for i, val := range values {
-		log.Printf("Parameters: %s", val)
 		query += val.(string)
 		if i != len(values)-1 {
 			query += ","

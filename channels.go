@@ -46,7 +46,6 @@ func (c *client) ChannelsList(ctx context.Context, request api.ChannelListReques
 	requestPtr := &request
 	parameters := EncodeParameters(requestPtr)
 
-	log.Printf(c.url() + "/group_channels" + parameters)
 	req, err := http.NewRequest(http.MethodGet, c.url()+"/group_channels"+parameters, bytes.NewBuffer(body))
 	if err != nil {
 		return nil, err
