@@ -1,9 +1,17 @@
 package api
 
+type ChannelListParams string
+
 type ChannelType string
 type InvitationStatus string
 type HiddenStatus string
 type CustomType string
+type DistinctMode string
+type PublicMode string
+type SuperMode string
+type Order string
+
+const ()
 
 const (
 	GROUP_CHANNEL ChannelType = "group_channels"
@@ -20,6 +28,31 @@ const (
 	UNHIDDEN                   HiddenStatus = "unhidden"
 	HIDDEN_ALLOW_AUTO_UNHIDE   HiddenStatus = "hidden_allow_auto_unhide"
 	HIDDEN_PREVENT_AUTO_UNHIDE HiddenStatus = "hidden_prevent_auto_unhide"
+)
+
+const (
+	DISTINCT_ALL DistinctMode = "all"
+	DISTINCT     DistinctMode = "distinct"
+	NONDISTINCT  DistinctMode = "nondistinct"
+)
+
+const (
+	PUBLIC_ALL PublicMode = "all"
+	PRIVATE    PublicMode = "private"
+	PUBLIC     PublicMode = "public"
+)
+
+const (
+	SUPER_ALL SuperMode = "all"
+	SUPER     SuperMode = "super"
+	NONSUPER  SuperMode = "nonsuper"
+)
+
+const (
+	CHRONOLOGICAL               Order = "chronological"
+	LATEST_LAST_MESSAGE         Order = "latest_last_message"
+	CHANNEL_NAME_ALPHABETICAL   Order = "channel_name_alphabetical"
+	METADATA_VALUE_ALPHABETICAL Order = "metadata_value_alphabetical"
 )
 
 type ChannelParams struct {
@@ -69,4 +102,30 @@ type ChannelCreateResponse struct {
 	LastMessage          Message                 `json:"last_message"`
 	CreatedAt            int32                   `json:"created_at"`
 	Freeze               bool                    `json:"freeze"`
+}
+
+type ChannelListRequest struct {
+	Token               *string       `json:"token,omitempty"`
+	Limit               *int          `json:"limit,omitempty"`
+	DistinctMode        *DistinctMode `json:"distinct_mode,omitempty"`
+	PublicMode          *PublicMode   `json:"public_mode,omitempty"`
+	SuperMode           *SuperMode    `json:"super_mode,omitempty"`
+	CreatedAfter        *uint64       `json:"created_after,omitempty"`
+	CreatedBefore       *uint64       `json:"created_before,omitempty"`
+	ShowEmpty           bool          `json:"show_empty"`
+	ShowMember          bool          `json:"show_member"`
+	ShowDeliveryReceipt bool          `json:"show_delivery_receipt"`
+	ShowReadReceipt     bool          `json:"show_read_receipt"`
+	ShowMetadata        bool          `json:"show_metadata"`
+	ShowFrozen          bool          `json:"show_frozen"`
+	Order               *Order        `json:"order,omitempty"`
+	MetadataOrderKey    *string       `json:"metadata_order_key,omitempty"`
+	CustomTypes         *string       `json:"custom_types,omitempty"`
+	MembersExactlyIn    []string      `json:"members_exactly_in"`
+	// TODO: FINISH THE FIELDS
+}
+
+type ChannelListResponse struct {
+	Channels []ChannelCreateResponse `json:"channels"`
+	Next     *string                 `json:"next"`
 }

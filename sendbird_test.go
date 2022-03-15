@@ -2,6 +2,7 @@ package sendbird
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"testing"
 
@@ -121,4 +122,98 @@ func TestSendMessage(t *testing.T) {
 	}
 
 	log.Printf("Message ID: %d", message.MessageID)
+}
+
+func TestListChannels(t *testing.T) {
+	config := getConfig(t)
+	client, err := NewClient(ClientConfig{
+		ApplicationID: config.SendBirdAppID,
+		APIToken:      config.SendBirdAPIToken,
+		Version:       config.SendBirdVersion,
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	ctx := context.Background()
+	user1 := format.NewUserID()
+	user2 := format.NewUserID()
+	user3 := format.NewUserID()
+
+	users1 := []string{user1.String(), user2.String()}
+	users2 := []string{user1.String(), user3.String()}
+	users3 := []string{user1.String(), user2.String(), user3.String()}
+
+	usersArr := [][]string{
+		users1,
+		users2,
+		users3,
+	}
+	channelName := user1.String() + ":" + user2.String()
+
+	for _, j := range users3 {
+		user, err := client.UsersCreate(ctx, api.UsersCreateRequest{
+			UserID:     j,
+			Nickname:   j,
+			ProfileURL: "",
+		})
+		if err != nil {
+			t.Fatal(err)
+		}
+		log.Printf("New User %s: %s", user.UserID, user.CreatedAt)
+	}
+
+	for _, users := range usersArr {
+		_, err := client.ChannelsCreate(ctx, api.ChannelCreateRequest{
+			UserIDs: users,
+			Name:    &channelName,
+		})
+		if err != nil {
+			t.Fatal(err)
+		}
+	}
+
+	for _, users := range usersArr {
+
+		channelList, err := client.ChannelsList(ctx, api.ChannelListRequest{
+			ShowEmpty:           true,
+			ShowMember:          false,
+			ShowDeliveryReceipt: false,
+			ShowReadReceipt:     false,
+			ShowMetadata:        false,
+			ShowFrozen:          false,
+			MembersExactlyIn:    users,
+		})
+
+		for _, channel := range channelList.Channels {
+			fmt.Printf("Channel id: %s\n", channel.ChannelUrl)
+		}
+
+		if err != nil {
+			t.Fatal(err)
+		}
+		if len(channelList.Channels) != 1 {
+			//fmt.Printf("%+v", channelList.Channels)
+			log.Printf("Query incorrect: request responded with %d channels", len(channelList.Channels))
+			t.Fatal("Query incorrect: request responded with multiple channels")
+		}
+	}
+	log.Println("Query Pass")
+}
+
+func TestEncoder(t *testing.T) {
+	user1 := format.NewUserID()
+	user2 := format.NewUserID()
+	user3 := format.NewUserID()
+	users := []string{user1.String(), user2.String(), user3.String()}
+
+	EncodeParameters(&api.ChannelListRequest{
+		ShowEmpty:           true,
+		ShowMember:          false,
+		ShowDeliveryReceipt: false,
+		ShowReadReceipt:     false,
+		ShowMetadata:        false,
+		ShowFrozen:          false,
+		MembersExactlyIn:    users,
+	})
 }

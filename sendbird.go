@@ -17,6 +17,7 @@ type Client interface {
 	UsersDelete(context.Context, api.UsersDeleteRequest) error
 
 	ChannelsCreate(context.Context, api.ChannelCreateRequest) (*api.ChannelCreateResponse, error)
+	ChannelsList(context.Context, api.ChannelListRequest) (*api.ChannelListResponse, error)
 
 	SendUserMessage(context.Context, api.SendUserMessageRequest, api.ChannelParams) (*api.UserMessage, error)
 	SendFileMessage(context.Context, api.SendFileMessageRequest, api.ChannelParams) (*api.FileMessage, error)
