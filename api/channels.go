@@ -129,3 +129,11 @@ type ChannelListResponse struct {
 	Channels []ChannelCreateResponse `json:"channels"`
 	Next     *string                 `json:"next"`
 }
+
+type AddMemberRequest struct {
+	ChannelUrl string  `json:"channel_url"`
+	UserId     string  `json:"user_id"`
+	AccessCode *string `json:"access_code,omitempty"`
+}
+
+type AddMemberResponse struct{}
