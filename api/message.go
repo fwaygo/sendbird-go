@@ -92,9 +92,9 @@ type SendFileMessageRequest struct {
 	SendBaseMessageRequest
 	UserID                    string          `json:"user_id"`
 	URL                       string          `json:"url"`
-	FileName                  string          `json:"file_name"`
+	FileName                  *string         `json:"file_name,omitempty"`
 	FileSize                  *uint64         `json:"file_size,omitempty"`
-	FileType                  string          `json:"file_type"`
+	FileType                  *string         `json:"file_type,omitempty"`
 	Thumbnails                []string        `json:"thumbnails,omitempty"`
 	RequireAuth               *bool           `json:"require_auth,omitempty"`
 	SendPush                  *bool           `json:"send_push,omitempty"`
