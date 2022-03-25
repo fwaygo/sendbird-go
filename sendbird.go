@@ -23,6 +23,8 @@ type Client interface {
 
 	SendUserMessage(context.Context, api.SendUserMessageRequest, api.ChannelParams) (*api.UserMessage, error)
 	SendFileMessage(context.Context, api.SendFileMessageRequest, api.ChannelParams) (*api.FileMessage, error)
+
+	AddReaction(context.Context, api.AddReactionRequest, api.ChannelParams) (*api.ReactionUpdateResponse, error)
 }
 
 type ClientConfig struct {

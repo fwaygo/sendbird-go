@@ -6,11 +6,17 @@ import (
 
 type MessageType string
 type MentionType string
+type ReactionOperation string
 
 const (
 	MESG MessageType = "MESG"
 	FILE MessageType = "FILE"
 	ADMM MessageType = "ADMM"
+)
+
+const (
+	ADD    ReactionOperation = "ADD"
+	DELETE ReactionOperation = "DELETE"
 )
 
 type SendBirdFile struct {
@@ -96,4 +102,23 @@ type SendFileMessageRequest struct {
 	AppleCriticalAlertOptions json.RawMessage `json:"apple_critical_alert_options"`
 	Sound                     *string         `json:"sound,omitempty"`
 	Volume                    *float32        `json:"volume,omitempty"`
+}
+
+type AddReactionRequest struct {
+	UserID   string `json:"user_id"`
+	Reaction string `json:"reaction"`
+}
+
+type RemoveReactionRequest struct {
+	UserID    string `json:"user_id"`
+	MessageID uint64 `json:"message_id"`
+	Reaction  string `json:"reaction"`
+}
+
+type ReactionUpdateResponse struct {
+	UserID    string            `json:"user_id"`
+	Operation ReactionOperation `json:"operation"`
+	Success   bool              `json:"success"`
+	Reaction  string            `json:"reaction"`
+	UpdatedAt uint64            `json:"updated_at"`
 }

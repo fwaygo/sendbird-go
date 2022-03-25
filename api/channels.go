@@ -58,6 +58,7 @@ const (
 type ChannelParams struct {
 	ChannelType ChannelType
 	ChannelUrl  string
+	MessageID   *uint64
 }
 
 type ChannelCreateRequest struct {

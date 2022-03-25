@@ -18,8 +18,14 @@ func formatArrayToParams(key string, values []interface{}) string {
 			query += ","
 		}
 	}
-
 	return query
+}
+
+func structToMap(data interface{}) map[string]interface{} {
+	toRet := make(map[string]interface{})
+	b, _ := json.Marshal(data)
+	json.Unmarshal(b, &toRet)
+	return toRet
 }
 
 func EncodeParameters(getRequest *api.ChannelListRequest) string {
@@ -41,11 +47,4 @@ func EncodeParameters(getRequest *api.ChannelListRequest) string {
 		paramString += "&"
 	}
 	return paramString
-}
-
-func structToMap(data interface{}) map[string]interface{} {
-	toRet := make(map[string]interface{})
-	b, _ := json.Marshal(data)
-	json.Unmarshal(b, &toRet)
-	return toRet
 }
