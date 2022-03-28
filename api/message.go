@@ -110,9 +110,8 @@ type AddReactionRequest struct {
 }
 
 type RemoveReactionRequest struct {
-	UserID    string `json:"user_id"`
-	MessageID uint64 `json:"message_id"`
-	Reaction  string `json:"reaction"`
+	UserID   string `json:"user_id"`
+	Reaction string `json:"reaction"`
 }
 
 type ReactionUpdateResponse struct {

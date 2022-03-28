@@ -25,6 +25,7 @@ type Client interface {
 	SendFileMessage(context.Context, api.SendFileMessageRequest, api.ChannelParams) (*api.FileMessage, error)
 
 	AddReaction(context.Context, api.AddReactionRequest, api.ChannelParams) (*api.ReactionUpdateResponse, error)
+	RemoveReaction(context.Context, api.RemoveReactionRequest, api.ChannelParams) (*api.ReactionUpdateResponse, error)
 }
 
 type ClientConfig struct {
