@@ -147,7 +147,11 @@ type ChannelHideRequest struct {
 	HidePreviousMessages *bool  `json:"hide_previous_messages,omitempty"`
 }
 
-type ChannelHideResponse struct{}
+type ChannelUnhideRequest struct {
+	ChannelUrl      string `json:"channel_url"`
+	UserID          string `json:"user_id"`
+	ShouldUnhideAll *bool  `json:"should_unhide_all,omitempty"`
+}
 
 type ChannelGetRequest struct {
 	ChannelUrl          string `json:"channel_url"`

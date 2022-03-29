@@ -135,3 +135,31 @@ func (c *client) ChannelsHide(ctx context.Context, request api.ChannelHideReques
 
 	return nil
 }
+
+func (c *client) ChannelsUnhide(ctx context.Context, request api.ChannelUnhideRequest) error {
+	body, err := json.Marshal(request)
+	if err != nil {
+		return err
+	}
+
+	req, err := http.NewRequest(
+		http.MethodDelete,
+		fmt.Sprintf(
+			"%s/group_channels/%s/hide?user_id=%s",
+			c.url(),
+			request.ChannelUrl,
+			request.UserID,
+		),
+		bytes.NewBuffer(body),
+	)
+	if err != nil {
+		return err
+	}
+
+	_, err = c.do(req)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
