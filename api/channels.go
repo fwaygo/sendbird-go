@@ -82,7 +82,7 @@ type ChannelCreateRequest struct {
 	BlockSDKUserChannelJoin *bool                       `json:"block_sdk_user_channel_join,omitempty"`
 }
 
-type ChannelCreateResponse struct {
+type ChannelResponse struct {
 	Name                 string                  `json:"name"`
 	ChannelUrl           string                  `json:"channel_url"`
 	CoverUrl             string                  `json:"cover_url"`
@@ -127,8 +127,8 @@ type ChannelListRequest struct {
 }
 
 type ChannelListResponse struct {
-	Channels []ChannelCreateResponse `json:"channels"`
-	Next     *string                 `json:"next"`
+	Channels []ChannelResponse `json:"channels"`
+	Next     *string           `json:"next"`
 }
 
 type AddMemberRequest struct {
@@ -148,3 +148,12 @@ type ChannelHideRequest struct {
 }
 
 type ChannelHideResponse struct{}
+
+type ChannelGetRequest struct {
+	ChannelUrl          string `json:"channel_url"`
+	ShowDeliveryReceipt *bool  `json:"show_delivery_receipt"`
+	ShowReadReceipt     *bool  `json:"show_read_receipt"`
+	ShowMember          *bool  `json:"show_member"`
+}
+
+type ChannelGetResponse = ChannelResponse

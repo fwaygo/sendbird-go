@@ -16,11 +16,11 @@ type Client interface {
 	UsersUpdate(context.Context, api.UsersUpdateRequest) (*api.UsersUpdateResponse, error)
 	UsersDelete(context.Context, api.UsersDeleteRequest) error
 
-	ChannelsCreate(context.Context, api.ChannelCreateRequest) (*api.ChannelCreateResponse, error)
+	ChannelsCreate(context.Context, api.ChannelCreateRequest) (*api.ChannelResponse, error)
 	ChannelsList(context.Context, api.ChannelListRequest) (*api.ChannelListResponse, error)
+	ChannelsView(context.Context, api.ChannelGetRequest) (*api.ChannelResponse, error)
 	ChannelsHide(context.Context, api.ChannelHideRequest) error
-
-	AddMemberToGroupChannel(context.Context, api.AddMemberRequest) error
+	ChannelsAddMember(context.Context, api.AddMemberRequest) error
 
 	SendUserMessage(context.Context, api.SendUserMessageRequest, api.ChannelParams) (*api.UserMessage, error)
 	SendFileMessage(context.Context, api.SendFileMessageRequest, api.ChannelParams) (*api.FileMessage, error)

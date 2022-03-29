@@ -11,7 +11,7 @@ import (
 	"github.com/fwaygo/sendbird-go/api"
 )
 
-func (c *client) ChannelsCreate(ctx context.Context, request api.ChannelCreateRequest) (*api.ChannelCreateResponse, error) {
+func (c *client) ChannelsCreate(ctx context.Context, request api.ChannelCreateRequest) (*api.ChannelResponse, error) {
 	body, err := json.Marshal(request)
 	if err != nil {
 		return nil, err
@@ -28,7 +28,7 @@ func (c *client) ChannelsCreate(ctx context.Context, request api.ChannelCreateRe
 		return nil, err
 	}
 
-	var response api.ChannelCreateResponse
+	var response api.ChannelResponse
 	err = json.Unmarshal(resp, &response)
 	if err != nil {
 		return nil, err
@@ -65,7 +65,32 @@ func (c *client) ChannelsList(ctx context.Context, request api.ChannelListReques
 	return &response, nil
 }
 
-func (c *client) AddMemberToGroupChannel(ctx context.Context, request api.AddMemberRequest) error {
+func (c *client) ChannelsView(ctx context.Context, request api.ChannelGetRequest) (*api.ChannelResponse, error) {
+	body, err := json.Marshal(request)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, c.url()+"/group_channels/"+request.ChannelUrl, bytes.NewBuffer(body))
+	if err != nil {
+		return nil, err
+	}
+
+	res, err := c.do(req)
+	if err != nil {
+		return nil, err
+	}
+
+	var response api.ChannelGetResponse
+	err = json.Unmarshal(res, &response)
+	if err != nil {
+		return nil, err
+	}
+
+	return &response, nil
+}
+
+func (c *client) ChannelsAddMember(ctx context.Context, request api.AddMemberRequest) error {
 	body, err := json.Marshal(request)
 	if err != nil {
 		return err
