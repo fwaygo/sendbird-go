@@ -20,6 +20,7 @@ type Client interface {
 	ChannelsList(context.Context, api.ChannelListRequest) (*api.ChannelListResponse, error)
 	ChannelsView(context.Context, api.ChannelGetRequest) (*api.ChannelResponse, error)
 	ChannelsHide(context.Context, api.ChannelHideRequest) error
+	ChannelsUnhide(context.Context, api.ChannelUnhideRequest) error
 	ChannelsAddMember(context.Context, api.AddMemberRequest) error
 
 	SendUserMessage(context.Context, api.SendUserMessageRequest, api.ChannelParams) (*api.UserMessage, error)
