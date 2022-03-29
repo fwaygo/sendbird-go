@@ -141,7 +141,7 @@ type AddMemberResponse struct{}
 
 type ChannelHideRequest struct {
 	ChannelUrl           string `json:"channel_url"`
-	UserID               string `json:"user_id,omitempty"`
+	UserID               string `json:"user_id"`
 	AllowAutoUnhide      *bool  `json:"allow_auto_unhide,omitempty"`
 	ShouldUnhideAll      *bool  `json:"should_unhide_all,omitempty"`
 	HidePreviousMessages *bool  `json:"hide_previous_messages,omitempty"`
