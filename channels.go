@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
 
@@ -64,27 +65,48 @@ func (c *client) ChannelsList(ctx context.Context, request api.ChannelListReques
 	return &response, nil
 }
 
-func (c *client) AddMemberToGroupChannel(ctx context.Context, request api.AddMemberRequest) (*api.AddMemberResponse, error) {
+func (c *client) AddMemberToGroupChannel(ctx context.Context, request api.AddMemberRequest) error {
 	body, err := json.Marshal(request)
 	if err != nil {
-		return nil, err
+		return err
 	}
 
 	req, err := http.NewRequest(http.MethodPut, c.url()+"/group_channels/"+request.ChannelUrl+"/join", bytes.NewBuffer(body))
 	if err != nil {
-		return nil, err
+		return err
 	}
 
-	resp, err := c.do(req)
+	_, err = c.do(req)
 	if err != nil {
-		return nil, err
+		return err
 	}
 
-	var response api.AddMemberResponse
-	err = json.Unmarshal(resp, &response)
+	return nil
+}
+
+func (c *client) ChannelsHide(ctx context.Context, request api.ChannelHideRequest) error {
+	body, err := json.Marshal(request)
 	if err != nil {
-		return nil, err
+		return err
 	}
 
-	return &response, nil
+	req, err := http.NewRequest(
+		http.MethodPut,
+		fmt.Sprintf(
+			"%s/group_channels/%s/hide",
+			c.url(),
+			request.ChannelUrl,
+		),
+		bytes.NewBuffer(body),
+	)
+	if err != nil {
+		return err
+	}
+
+	_, err = c.do(req)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
