@@ -127,3 +127,13 @@ type ReactionUpdateResponse struct {
 	Reaction  string            `json:"reaction"`
 	UpdatedAt uint64            `json:"updated_at"`
 }
+
+type SearchMessageRequest struct {
+	ChannelType              ChannelType `json:"channel_type"`
+	ChannelURL               string      `json:"channel_url"`
+	MessageID                uint64      `json:"message_id"`
+	IncludeParentMessageInfo *bool       `json:"include_parent_message_info,omitempty"`
+	IncludeThreadInfo        *bool       `json:"include_thread_info,omitempty"`
+	IncludeReactions         *bool       `json:"include_reactions,omitempty"`
+	WithSortedMetaArray      *bool       `json:"with_sorted_meta_array,omitempty"`
+}

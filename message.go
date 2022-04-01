@@ -11,6 +11,31 @@ import (
 	"github.com/fwaygo/sendbird-go/api"
 )
 
+func (c *client) SearchMessage(ctx context.Context, request api.SearchMessageRequest) (*api.Message, error) {
+	req, err := http.NewRequest(http.MethodGet,
+		c.url()+fmt.Sprintf("/%s/%s/messages/%s",
+			request.ChannelType,
+			request.ChannelURL,
+			strconv.FormatUint(request.MessageID, 10)),
+		nil)
+	if err != nil {
+		return nil, err
+	}
+
+	resp, err := c.do(req)
+	if err != nil {
+		return nil, err
+	}
+
+	var response api.Message
+	err = json.Unmarshal(resp, &response)
+	if err != nil {
+		return nil, err
+	}
+
+	return &response, nil
+}
+
 func (c *client) SendUserMessage(ctx context.Context, request api.SendUserMessageRequest, channel api.ChannelParams) (*api.UserMessage, error) {
 	body, err := json.Marshal(request)
 	if err != nil {
