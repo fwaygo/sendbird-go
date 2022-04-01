@@ -161,3 +161,9 @@ type ChannelGetRequest struct {
 }
 
 type ChannelGetResponse = ChannelResponse
+
+type ChannelLeaveRequest struct {
+	ChannelURL     string   `json:"channel_url"`
+	UserIDs        []string `json:"user_ids"`
+	ShouldLeaveAll *bool    `json:"should_leave_all,omitempty"`
+}

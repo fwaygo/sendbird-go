@@ -164,3 +164,26 @@ func (c *client) ChannelsUnhide(ctx context.Context, request api.ChannelUnhideRe
 
 	return nil
 }
+
+func (c *client) ChannelsLeave(ctx context.Context, request api.ChannelLeaveRequest) error {
+	body, err := json.Marshal(request)
+	if err != nil {
+		return err
+	}
+
+	req, err := http.NewRequest(
+		http.MethodPut,
+		fmt.Sprintf("%s/group_channels/%s/leave", c.url(), request.ChannelURL),
+		bytes.NewBuffer(body),
+	)
+	if err != nil {
+		return err
+	}
+
+	_, err = c.do(req)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}

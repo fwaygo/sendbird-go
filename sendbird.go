@@ -22,6 +22,7 @@ type Client interface {
 	ChannelsHide(context.Context, api.ChannelHideRequest) error
 	ChannelsUnhide(context.Context, api.ChannelUnhideRequest) error
 	ChannelsAddMember(context.Context, api.AddMemberRequest) error
+	ChannelsLeave(context.Context, api.ChannelLeaveRequest) error
 
 	SearchMessage(context.Context, api.SearchMessageRequest) (*api.Message, error)
 	SendUserMessage(context.Context, api.SendUserMessageRequest, api.ChannelParams) (*api.UserMessage, error)
