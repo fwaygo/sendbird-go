@@ -25,6 +25,7 @@ type Client interface {
 
 	SendUserMessage(context.Context, api.SendUserMessageRequest, api.ChannelParams) (*api.UserMessage, error)
 	SendFileMessage(context.Context, api.SendFileMessageRequest, api.ChannelParams) (*api.FileMessage, error)
+	DeleteMessage(context.Context, api.DeleteMessageRequest) error
 
 	AddReaction(context.Context, api.AddReactionRequest, api.ChannelParams) (*api.ReactionUpdateResponse, error)
 	RemoveReaction(context.Context, api.RemoveReactionRequest, api.ChannelParams) (*api.ReactionUpdateResponse, error)
