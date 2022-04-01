@@ -104,6 +104,12 @@ type SendFileMessageRequest struct {
 	Volume                    *float32        `json:"volume,omitempty"`
 }
 
+type DeleteMessageRequest struct {
+	ChannelType ChannelType `json:"channel_type"`
+	ChannelURL  string      `json:"channel_url"`
+	MessageID   uint64      `json:"message_id"`
+}
+
 type AddReactionRequest struct {
 	UserID   string `json:"user_id"`
 	Reaction string `json:"reaction"`

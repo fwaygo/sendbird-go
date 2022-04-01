@@ -61,7 +61,26 @@ func (c *client) SendFileMessage(ctx context.Context, request api.SendFileMessag
 	return &response, nil
 }
 
-// TODO: combine both add and delete reactions
+func (c *client) DeleteMessage(ctx context.Context, request api.DeleteMessageRequest) error {
+	req, err := http.NewRequest(
+		http.MethodDelete,
+		c.url()+fmt.Sprintf("/%s/%s/messages/%s",
+			request.ChannelType,
+			request.ChannelURL,
+			strconv.FormatUint(request.MessageID, 10)),
+		nil)
+	if err != nil {
+		return err
+	}
+
+	_, err = c.do(req)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (c *client) AddReaction(ctx context.Context, request api.AddReactionRequest, channel api.ChannelParams) (*api.ReactionUpdateResponse, error) {
 	if channel.MessageID == nil {
 		return nil, fmt.Errorf("message id is nil")
