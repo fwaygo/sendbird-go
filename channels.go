@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"strconv"
 
 	"github.com/fwaygo/sendbird-go/api"
 )
@@ -71,7 +72,7 @@ func (c *client) ChannelsView(ctx context.Context, request api.ChannelGetRequest
 		return nil, err
 	}
 
-	req, err := http.NewRequest(http.MethodGet, c.url()+"/group_channels/"+request.ChannelUrl, bytes.NewBuffer(body))
+	req, err := http.NewRequest(http.MethodGet, c.url()+"/group_channels/"+request.ChannelUrl+strconv.FormatBool(*request.ShowMember), bytes.NewBuffer(body))
 	if err != nil {
 		return nil, err
 	}
