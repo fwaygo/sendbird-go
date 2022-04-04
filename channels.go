@@ -72,7 +72,17 @@ func (c *client) ChannelsView(ctx context.Context, request api.ChannelGetRequest
 		return nil, err
 	}
 
-	req, err := http.NewRequest(http.MethodGet, c.url()+"/group_channels/"+request.ChannelUrl+"?show_member="+strconv.FormatBool(*request.ShowMember), bytes.NewBuffer(body))
+	endpoint := c.url() + "/group_channels/" + request.ChannelUrl
+	if request.ShowMember != nil {
+		endpoint += "?show_member=" + strconv.FormatBool(*request.ShowMember)
+	}
+	if request.ShowDeliveryReceipt != nil {
+		endpoint += "&show_delivery_receipt=" + strconv.FormatBool(*request.ShowDeliveryReceipt)
+	}
+	if request.ShowReadReceipt != nil {
+		endpoint += "&show_read_receipt=" + strconv.FormatBool(*request.ShowReadReceipt)
+	}
+	req, err := http.NewRequest(http.MethodGet, endpoint, bytes.NewBuffer(body))
 	if err != nil {
 		return nil, err
 	}
