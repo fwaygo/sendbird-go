@@ -64,5 +64,26 @@ func (c *client) UsersUpdate(ctx context.Context, request api.UsersUpdateRequest
 }
 
 func (c *client) UsersDelete(ctx context.Context, request api.UsersDeleteRequest) error {
+	body, err := json.Marshal(request)
+	if err != nil {
+		return err
+	}
+
+	req, err := http.NewRequest(http.MethodDelete, c.url()+"/users/"+request.UserID, bytes.NewBuffer(body))
+	if err != nil {
+		return err
+	}
+
+	resp, err := c.do(req)
+	if err != nil {
+		return err
+	}
+
+	var response struct{}
+	err = json.Unmarshal(resp, &response)
+	if err != nil {
+		return err
+	}
+
 	return nil
 }
